@@ -26,8 +26,8 @@ sigma = zeros(1, size(X, 2));
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
 l=length(X(1,:))
-mu=mean(X)
-sigma=std(X)
+mu=mean(X);
+sigma=std(X);
 
 
 
