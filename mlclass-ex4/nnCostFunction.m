@@ -38,8 +38,24 @@ Theta2_grad = zeros(size(Theta2));
 %         variable J. After implementing Part 1, you can verify that your
 %         cost function computation is correct by verifying the cost
 %         computed in ex4.m
-h = sigmoid(X*theta);
-J = (-y'* log(h) - (1 - y)'* log(1-h) + lambda / 2 * (sum(theta.^2) - theta(1)^2 ) )/m;
+Xm=[ones(m,1),Xm];
+z2=Xm * Theta1';
+a2=sigmoid(z2);
+a2=[ones(m,1),a2];
+z3=a2*t2';
+a3=sigmoid(z3);
+h=a3;
+
+J=(y'*log(h) + (1-y)'*(1-log(h)))*(-1/m)
+
+% X = reshape(3 * sin(1:1:30), 3, 10);
+% Xm = reshape(sin(1:32), 16, 2) / 5;
+% ym = 1 + mod(1:16,4)';
+% t1 = sin(reshape(1:2:24, 4, 3));
+% t2 = cos(reshape(1:2:40, 4, 5));
+% t  = [t1(:) ; t2(:)];
+
+% h = sigmoid( X * theta );
 
 
 %
