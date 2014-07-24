@@ -38,16 +38,22 @@ Theta2_grad = zeros(size(Theta2));
 %         variable J. After implementing Part 1, you can verify that your
 %         cost function computation is correct by verifying the cost
 %         computed in ex4.m
-Xm=[ones(m,1),Xm];
-z2=Xm * Theta1';
-a2=sigmoid(z2);
-a2=[ones(m,1),a2];
-z3=a2*t2';
-a3=sigmoid(z3);
-h=a3;
+I = eye(num_labels);
+Y = zeros(m, num_labels);
+for i=1:m
+  Y(i, :)= I(y(i), :);
+end
+%abel generated
 
-J=(y'*log(h) + (1-y)'*(1-log(h)))*(-1/m)
 
+a1 = [ones(m, 1) X];
+z2 = a1 * Theta1';
+a2 = [ones(size(z2, 1), 1) sigmoid(z2)];
+z3 = a2*Theta2';
+H = a3 = sigmoid(z3);
+
+
+J = (1/m)*sum(sum((-Y) .* log(H) - (1-Y) .* log(1-H), 2));
 % X = reshape(3 * sin(1:1:30), 3, 10);
 % Xm = reshape(sin(1:32), 16, 2) / 5;
 % ym = 1 + mod(1:16,4)';
@@ -81,20 +87,6 @@ J=(y'*log(h) + (1-y)'*(1-log(h)))*(-1/m)
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
