@@ -49,7 +49,9 @@ a2 = [ones(size(z2, 1), 1) sigmoid(z2)];
 z3 = a2*Theta2';
 h = a3 = sigmoid(z3);
 
-J = sum(sum( (Y) .* log(h) + (1-Y) .* log(1-h)) )/-m;
+regularization = (lambda/(2*m)) * (sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
+
+J = sum(sum( (Y) .* log(h) + (1-Y) .* log(1-h)) )/-m + regularization;
 % X = reshape(3 * sin(1:1:30), 3, 10);
 % Xm = reshape(sin(1:32), 16, 2) / 5;
 % ym = 1 + mod(1:16,4)';
