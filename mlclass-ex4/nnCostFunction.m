@@ -70,8 +70,8 @@ J = sum(sum( (Y) .* log(h) + (1-Y) .* log(1-h)) )/-m + regularization;
 %               over the training examples if you are implementing it for the 
 %               first time.
 
-error3=a3-y;
-error2=error3*Theta2 .* sigmoidGradient(a2)(:,2:end);
+error3=a3-Y;
+error2=(error3*Theta2 .* sigmoidGradient(a2))(:,2:end);
 %no error1 
 
 
