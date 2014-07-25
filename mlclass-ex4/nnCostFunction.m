@@ -71,7 +71,7 @@ J = sum(sum( (Y) .* log(h) + (1-Y) .* log(1-h)) )/-m + regularization;
 %               first time.
 
 error3=a3-Y;
-error2=(error3*Theta2 .* sigmoidGradient(a2))(:,2:end);
+error2=(error3*Theta2 .* sigmoidGradient([ones(size(z2, 1), 1) z2]))(:,2:end);
 %no error1 
 
 
