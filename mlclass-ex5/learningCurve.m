@@ -55,6 +55,19 @@ error_val   = zeros(m, 1);
 
 
 
+for i = 1:m,
+  X_train = X(1:i, :);
+  y_train = y(1:i);
+  %incrementally add test training set
+
+  %get theta for different size of training set, put lambda in.
+  theta = trainLinearReg(X_train, y_train, lambda);
+  %comput error for each size of training set
+  %no regularization
+  error_train(i) = linearRegCostFunction(X_train, y_train, theta, 0);
+  error_val(i) = linearRegCostFunction(Xval, yval, theta, 0);
+end
+
 
 
 
