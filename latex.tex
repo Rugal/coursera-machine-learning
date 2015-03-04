@@ -1,0 +1,102 @@
+\documentclass[12pt]{article}
+\usepackage{natbib,hyperref,fullpage,times,url}
+\usepackage{amssymb,amsmath,mathptmx,mathrsfs}
+\usepackage{graphicx, epstopdf}
+\DeclareGraphicsExtensions{.eps}
+\title{Title 3}
+\author{Rugal Bernstein\\ \href{mailto:yaoy@cs}{yaoy345@ca}}
+\date{\today}
+\bibliographystyle{plain}
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\section{Max Margin Solution (20 points)}
+\subsection*{(a) Using your knowledge of the maximum margin boundary, write down a vector that points in the same direction as $w$}
+Answer:\\\\
+$$
+\begin{aligned}
+\phi(x_1) &= [1,0,0]\\
+\phi(x_2) &= [1,2,2]
+\end{aligned}
+$$
+\includegraphics[scale=0.9]{w_vector}\\ 
+The plot above is line between $\phi(x_1)$ and $\phi(x_2)$. Since the hyperplane will separate these two points with the margin distance maximized, this line is actually the normal of this hyperplane. so I can say vector $$v=\phi(x_2) - \phi(x_1)=[0,2,2]$$ will point to the same direction as $w$.\\ 
+
+\subsection*{(b) Derive the actual solution $w$ and $b$	}
+Answer:\\\\
+The hyperplane goes through point $(1,1,1)$ and its normal is $[0,1,1]$, hence the decision boundary as below:\\
+$$
+[0,1,1] \cdot [x-1, y-1,z-1]=0\\
+$$
+$$
+y+z-2=0
+$$
+Hence, as shown above, $w=[0,1,1]$, and bias term $b=-2$.
+\subsection*{(c) What is the value of the margin?}
+Answer:\\\\
+$$
+2\gamma = ||v|| = 2\sqrt{2}
+$$
+\subsection*{(d) Write down the decision boundary $f(x)$ as a function of $x$.}
+Answer :\\\\
+\includegraphics[scale=0.8]{decision_boundary}\\ 
+$$
+\begin{aligned}
+f(x)&=\sqrt{2}x+x^2-2\\
+&=\left(x+\frac{\sqrt{2}}{2}\right)^2-\frac{5}{2}
+\end{aligned}
+$$
+For large negative $x$ value, it will be classified as $y=1$.\\\\
+
+The discriminative function does not equal zero at the midpoint because this question employed kernel, those original data were mapped onto another dimension.
+\section{Kernels (10 points)}
+\subsection*{(a) Is this function a kernel?}
+Firstly I need to split the whole document into words, use every single word lowercased as a element and form the whole words sequence as a vector, followed by trim the comma and full stop.\\
+
+"This is a sentence, a good sentence." $\rightarrow$ [this, is, a, sentence, a, good, sentence]\\\\
+Then I need to sort this vector by alphabetic order, and eliminate the duplicate element.\\
+
+[This, is, a, sentence, a, good, sentence] $\rightarrow$ [a, good, is, sentence, this]\\\\
+AFter that, I need to hash elements of this vector into a dictionary table, if in that the element appears particular position, mark 1, otherwise, mark 0.\\
+
+[a, good, is, sentence, this] $\rightarrow$mapped by dictionary$\rightarrow$ [...1, ...1, ...0, 1, ...1, 0, ...1...]\\\\
+Althought this will be a very big vector after hash check with dictionary. Now this is our function $\phi(x)$.\\
+When I use $\phi(x)\phi(z)$, it will actually compute the number of unique words that occur in both $x$ and $z$. The return value is the number of word.\\\\
+So I think this is a kernel function.
+
+\subsection*{(b) Show that the following is a kernel}
+$$
+\begin{aligned}
+k_{\beta}(\textbf{x},\textbf{z})&=(1+\beta \textbf{x}^T \textbf{z})^2-1\\
+&=(\beta \textbf{x}^T \textbf{z})^2+2\beta \textbf{x}^T \textbf{z}\\
+&=\left(
+\begin{array}{c}
+\beta\textbf{x}^2\\
+\sqrt{2\beta}\textbf{x}
+\end{array}
+\right) \cdot
+\left(
+\begin{array}{c}
+\beta\textbf{z}^2\\
+\sqrt{2\beta}\textbf{z}
+\end{array}
+\right)
+\end{aligned}
+$$
+So I think the feature map is 
+$$
+\Phi(\textbf{x})=
+\left(
+\begin{array}{c}
+\beta\textbf{x}^2\\
+\sqrt{2\beta}\textbf{x}
+\end{array}
+\right)
+$$
+Hence this $k_{\beta}(\textbf{x},\textbf{z})$ is kernel function.
+
+
+
+\end{document}
